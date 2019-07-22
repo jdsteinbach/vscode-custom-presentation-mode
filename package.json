@@ -1,0 +1,85 @@
+{
+	"name": "custom-presentation-mode",
+	"displayName": "Custom Presentation Mode",
+	"description": "Toggle presentation mode with zoom, color-scheme, and Screencast mode",
+  "version": "0.0.1",
+  "author": "James Steinbach",
+  "publisher": "jdsteinbach",
+	"engines": {
+		"vscode": "^1.36.0"
+	},
+	"categories": [
+    "Themes",
+    "Other"
+  ],
+  "keywords": [
+    "presentation",
+    "presentation mode",
+    "slides",
+    "talk",
+    "conference",
+    "meetup"
+  ],
+	"activationEvents": [
+		"onCommand:extension.customPresentationMode"
+	],
+  "main": "./extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdsteinbach/vscode-custom-presentation-mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jdsteinbach/vscode-custom-presentation-mode/issues"
+  },
+  "homepage": "https://github.com/jdsteinbach/vscode-custom-presentation-mode",
+	"contributes": {
+		"commands": [{
+      "command": "extension.customPresentationMode",
+      "title": "Custom Presentation Mode: Toggle Off/On"
+    }],
+    "keybindings": [{
+      "command": "extension.customPresentationMode",
+      "key": "ctrl+shift+p"
+    }],
+    "configuration": {
+      "type": "object",
+      "title": "Custom Presentation Mode config",
+      "properties": {
+        "customPresentationMode": {
+          "type": "object",
+          "default": {
+            "workbench.colorTheme": "Visual Studio Light",
+            "editor.fontWeight": "400",
+            "window.zoomLevel": 2,
+            "verbose": false
+          },
+          "description": "Default settings for Custom Presentation Mode"
+        },
+        "customPresentationMode.backup": {
+          "type": "object",
+          "default": {},
+          "description": "Backup workspace settings for Custom Presentation Mode"
+        },
+        "customPresentationMode.verbose": {
+          "type": "boolean",
+          "default": false,
+          "description": "Setting for showing notifications for Custom Presentation Mode"
+        }
+      }
+    }
+	},
+	"scripts": {
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.36.0",
+		"eslint": "^5.13.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"vscode-test": "^1.0.0-next.0"
+	}
+}
