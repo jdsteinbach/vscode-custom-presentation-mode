@@ -20,6 +20,8 @@
     "conference",
     "meetup"
   ],
+  "icon": "CPM-logo.png",
+  "extensionKind": "workspace",
 	"activationEvents": [
 		"onCommand:extension.customPresentationMode"
 	],
