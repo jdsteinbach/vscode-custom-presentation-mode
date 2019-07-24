@@ -45,13 +45,12 @@
       "type": "object",
       "title": "Custom Presentation Mode config",
       "properties": {
-        "customPresentationMode": {
+        "customPresentationMode.overrides": {
           "type": "object",
           "default": {
             "workbench.colorTheme": "Visual Studio Light",
-            "editor.fontWeight": "400",
-            "window.zoomLevel": 2,
-            "verbose": false
+            "editor.fontWeight": "normal",
+            "window.zoomLevel": 2
           },
           "description": "Default settings for Custom Presentation Mode"
         },

@@ -1,65 +1,72 @@
-# total-presentation-mode README
+# Custom Presentation Mode
 
-This is the README for your extension "total-presentation-mode". After writing up a brief description, we recommend including the following sections.
+A simple toggle for using VS Code during presentations. Changes `window.zoomLevel`, `editor.fontWeight`, and `workbench.colorTheme` to values that are better for displaying on a projector.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Custom Presentation Mode makes it easy to toggle between your normal daily work settings and projector-friendly presentation settings.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Default settings are listed below (with explanations of why they're sensible defaults). They can be overridden in your own settings by storing other values in `customPresentationMode`
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Custom Presentation Mode contributes the following settings:
 
-For example:
+## Command
 
-This extension contributes the following settings:
+`Custom Presentation Mode: Toggle Off/On` runs `extension.customPresentationMode`
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+## Keybinding
+
+`Ctrl + Shift + p` toggles Custom Presentation Mode on & off.
+
+## Configuration
+
+### Default Settings
+
+`"workbench.colorTheme": "Visual Studio Light"` - Light themes are more legible for audiences viewing a projector.
+
+`"editor.fontWeight": "normal"` - Lighter font weights are great for work, but less legible in a presentation.
+
+`"window.zoomLevel": 2` - This zooms in _the whole VS Code UI_, not just the editor font size!
+
+### Custom Settings
+
+`customPresentationMode.overrides`
+
+Nest any valid settings key/value pair in `customPresentationMode.overrides` in your user or workspace settings. For example:
+
+```json
+{
+  "customPresentationMode.overrides": {
+    "editor.fontSize": 20,
+    "editor.fontWeight": "700",
+    "editor.fontLigatures": false,
+    "editor.tabSize": 1,
+    "workbench.colorTheme": "Legacy Light (rainglow)",
+    "workbench.activityBar.visible": false
+  }
+}
+```
+
+### Other Options
+
+`customPresentationMode.verbose`
+
+* default: false,
+* description: Setting for showing notifications for Custom Presentation Mode
+
+`customPresentationMode.backup`
+* Values for any workspace settings that are overridden are stored here. Useful if VS Code crashes while Custom Presentation Mode is enabled and restarts with Custom Presentation options overriding user/workspace settings.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+If [VS Code crashes while Custom Presentation Mode is on, it'll probably restore with Custom Presentation Mode options still enabled](https://github.com/jdsteinbach/vscode-custom-presentation-mode/issues/1) in workspace settings (but with Custom Presentation Mode disabled). Check `customPresentationMode.backup` for the old values if you need them for a manual backup.
+
+_Note: If you know a good way to restore correctly from a crash, please comment with links to tutorials, examples, or relevant docs, or open a PR if you have the time & ability. Thanks!_
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release

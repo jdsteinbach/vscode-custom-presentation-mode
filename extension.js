@@ -17,11 +17,11 @@ function activate(context) {
 
   // Get extension settings
   let cmpSettings = cfg.get('customPresentationMode') || {};
-  // Limit keys to loop through, remove `verbose` key
-  let cmpOptionKeys = Object.keys(cmpSettings);
+  let cmpOverrides = cmpSettings.overrides;
+  let cmpOverridesKeys = Object.keys(cmpOverrides);
 
   // Verbose output setitng
-  let showNotifications = cfg.get('customPresentationMode.verbose') || false;
+  let showNotifications = cmpSettings.verbose || false;
 
   // Initialie backup settings
   let backupSettings = {};
@@ -31,12 +31,12 @@ function activate(context) {
 
   let disposable = vscode.commands.registerCommand('extension.customPresentationMode', function () {
     if(isCustomPresentationMode) {
-      // Get backup settings from workspace config,
-      // otherwise use runtime stored backup
-      let backup = cfg.inspect('customPresentationMode.backup').workspaceValue || backupSettings;
+      // Get backup settings from runtime stored backup,
+      // otherwise use workspace config backup
+      let backup = backupSettings || cfg.inspect('customPresentationMode.backup').workspaceValue;
 
       // Loop through user's previous settings
-      cmpOptionKeys.map(k => {
+      cmpOverridesKeys.map(k => {
         // If previous value was workspace, restore it;
         // otherwise delete the workspace config value
         let previousValue = Object.keys(backup).indexOf(k) > -1
@@ -51,14 +51,14 @@ function activate(context) {
       cfg.update('customPresentationMode.backup', undefined, workspace);
     } else {
       // Loop through extension settings
-      cmpOptionKeys.map(k => {
+      cmpOverridesKeys.map(k => {
         // Backup previous workspace config value
         if (cfg.inspect(k).workspaceValue) {
           backupSettings[k] = cfg.get(k);
         }
 
         // Set CPM value
-        cfg.update(k, cmpSettings[k], workspace);
+        cfg.update(k, cmpOverrides[k], workspace);
       });
 
       cfg.update('customPresentationMode.backup', backupSettings, workspace);
