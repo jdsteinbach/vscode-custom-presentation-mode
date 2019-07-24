@@ -63,7 +63,7 @@ Nest any valid settings key/value pair in `customPresentationMode.overrides` in 
 
 If [VS Code crashes while Custom Presentation Mode is on, it'll probably restore with Custom Presentation Mode options still enabled](https://github.com/jdsteinbach/vscode-custom-presentation-mode/issues/1) in workspace settings (but with Custom Presentation Mode disabled). Check `customPresentationMode.backup` for the old values if you need them for a manual backup.
 
-_Note: If you know a good way to restore correctly from a crash, please comment with links to tutorials, examples, or relevant docs, or open a PR if you have the time & ability. Thanks!_
+_Note: If you know a good way to restore correctly from a crash, [please comment](https://github.com/jdsteinbach/vscode-custom-presentation-mode/issues/1) with links to tutorials, examples, or relevant docs, or open a PR if you have the time & ability. Thanks!_
 
 ## Release Notes
 
